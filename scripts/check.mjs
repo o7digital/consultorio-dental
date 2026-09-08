@@ -14,7 +14,7 @@ const expect = (condition, message) => {
 const matches = (pattern) => html.match(pattern) ?? [];
 const appointmentLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"#?]+)"/g)];
 const localAssetLinks = [
-  ...html.matchAll(/(?:href|src)="((?!https?:|#|tel:)[^"?]+)"/g),
+  ...html.matchAll(/(?:href|src)="((?!https?:|#|tel:|mailto:)[^"?]+)"/g),
   ...html.matchAll(/(?:srcset)="([^"]+)"/g),
 ];
 
@@ -34,6 +34,9 @@ expect(
 );
 expect(/width="\d+" height="\d+"[^>]*alt="[^"]+"/.test(html), 'Images need dimensions and alt text.');
 expect(html.includes('loading="lazy"'), 'Below-the-fold image lazy loading is missing.');
+expect(html.includes('más de 20 años de experiencia'), 'Migrated practice experience is missing.');
+expect(matches(/<cite>/g).length === 6, 'Expected six migrated patient testimonials.');
+expect(html.includes('Cámara intraoral'), 'Migrated intraoral-camera content is missing.');
 expect(css.length > 0, 'The stylesheet is empty.');
 expect(script.length > 0, 'The script is empty.');
 
