@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://consultoriodentalsatelite.com.mx/sitemap.xml
