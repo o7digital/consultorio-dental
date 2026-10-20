@@ -12,7 +12,7 @@ const expect = (condition, message) => {
 };
 
 const matches = (pattern) => html.match(pattern) ?? [];
-const appointmentLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"#?]+)"/g)];
+const appointmentLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"#]+)"/g)];
 const localAssetLinks = [
   ...html.matchAll(/(?:href|src)="((?!https?:|#|tel:|mailto:)[^"?]+)"/g),
   ...html.matchAll(/(?:srcset)="([^"]+)"/g),
@@ -27,16 +27,23 @@ expect(html.includes('rel="canonical" href="https://'), 'The HTTPS canonical is 
 expect(html.includes('property="og:title"'), 'Open Graph tags are missing.');
 expect(html.includes('"@type": "Dentist"'), 'Dentist structured data is missing.');
 expect(!/(?:href|src)="http:\/\//.test(html), 'An internal HTTP URL remains in the HTML.');
-expect(appointmentLinks.length === 9, 'Expected nine WhatsApp appointment links.');
+expect(appointmentLinks.length >= 12, 'Appointment links are missing.');
 expect(
-  appointmentLinks.every((match) => match[1] === 'https://wa.me/525534360588'),
+  appointmentLinks.every((match) => new URL(match[1]).pathname === '/525534360587'),
   'Every appointment link must use the requested WhatsApp URL.',
 );
 expect(/width="\d+" height="\d+"[^>]*alt="[^"]+"/.test(html), 'Images need dimensions and alt text.');
 expect(html.includes('loading="lazy"'), 'Below-the-fold image lazy loading is missing.');
-expect(html.includes('más de 20 años de experiencia'), 'Migrated practice experience is missing.');
-expect(matches(/<cite>/g).length === 6, 'Expected six migrated patient testimonials.');
-expect(html.includes('Cámara intraoral'), 'Migrated intraoral-camera content is missing.');
+expect(!html.includes('20+ años') && !html.includes('<cite>'), 'Unverified experience or testimonials remain.');
+expect(html.includes('Escáner intraoral') && html.includes('Radiografía digital'), 'Confirmed technology is missing.');
+expect(matches(/class="team-card"/g).length === 5, 'Expected five clinicians.');
+expect(matches(/<details>/g).length === 7, 'Expected seven treatment descriptions.');
+expect(html.includes('tel:+525553938629'), 'The clinic phone is missing.');
+const sectionIds = new Set([...html.matchAll(/id="([^"]+)"/g)].map(match => match[1]));
+for (const match of html.matchAll(/href="#([^"]+)"/g)) {
+  expect(sectionIds.has(match[1]), `Broken section link: ${match[1]}`);
+}
+JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 expect(css.length > 0, 'The stylesheet is empty.');
 expect(script.length > 0, 'The script is empty.');
 
