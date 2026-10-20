@@ -20,3 +20,5 @@
 @media(max-width:560px){.contact-map{height:340px}.footer-bottom{padding-right:50px}}
 
 .doctor-photo-placeholder{aspect-ratio:4/3;background:#e2e7e9;border-bottom:1px solid var(--line);margin:-32px -32px 28px}.team-card{overflow:hidden}@media(max-width:560px){.doctor-photo-placeholder{margin:-26px -26px 26px}}
+
+.brand-placeholder{display:inline-flex;align-items:center;flex:none}.logo-placeholder{display:block;width:230px;height:54px;background:rgba(24,62,97,.055);border:1px dashed rgba(24,62,97,.22);border-radius:2px}.footer-brand .logo-placeholder{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.24);height:72px}@media(max-width:560px){.logo-placeholder{width:190px;height:44px}.footer-brand .logo-placeholder{height:64px}}
