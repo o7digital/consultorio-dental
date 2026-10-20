@@ -4,6 +4,7 @@ const outputDirectory = new URL('../dist/', import.meta.url);
 const projectDirectory = new URL('../', import.meta.url);
 const files = [
   'index.html',
+  'aviso-de-privacidad.html',
   'favicon.svg',
   'styles.css',
   'script.js',

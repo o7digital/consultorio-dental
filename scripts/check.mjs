@@ -54,7 +54,7 @@ for (const match of localAssetLinks) {
     : [value];
 
   for (const candidate of candidates) {
-    await access(resolve(root, candidate)).catch(() => {
+    await access(resolve(root, candidate === '/aviso-de-privacidad' ? 'aviso-de-privacidad.html' : candidate)).catch(() => {
       failures.push(`Missing local asset: ${candidate}`);
     });
   }
