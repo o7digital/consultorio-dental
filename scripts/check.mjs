@@ -13,10 +13,7 @@ const expect = (condition, message) => {
 
 const matches = (pattern) => html.match(pattern) ?? [];
 const appointmentLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"#]+)"/g)];
-const localAssetLinks = [
-  ...html.matchAll(/(?:href|src)="((?!https?:|#|tel:|mailto:)[^"?]+)"/g),
-  ...html.matchAll(/(?:srcset)="([^"]+)"/g),
-];
+
 
 expect(matches(/<h1(?:\s|>)/g).length === 1, 'The page must contain exactly one H1.');
 expect(
@@ -47,16 +44,41 @@ JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>
 expect(css.length > 0, 'The stylesheet is empty.');
 expect(script.length > 0, 'The script is empty.');
 
-for (const match of localAssetLinks) {
-  const value = match[1];
-  const candidates = value.includes(',')
-    ? value.split(',').map((candidate) => candidate.trim().split(/\s+/)[0])
-    : [value];
-
-  for (const candidate of candidates) {
-    await access(resolve(root, candidate === '/aviso-de-privacidad' ? 'aviso-de-privacidad.html' : candidate)).catch(() => {
-      failures.push(`Missing local asset: ${candidate}`);
-    });
+const pages = [
+  ['index.html', 'es', '/'],
+  ['aviso-de-privacidad.html', 'es', '/aviso-de-privacidad'],
+  ['en/index.html', 'en', '/en/'],
+  ['en/privacy-notice.html', 'en', '/en/privacy-notice'],
+];
+const routes = new Map(pages.map(([file, , route]) => [route, file]));
+for (const [file, language, route] of pages) {
+  const page = await readFile(resolve(root, file), 'utf8');
+  expect(page.includes(`lang="${language}"`), `Wrong language: ${file}`);
+  expect(page.includes(`rel="canonical" href="https://consultoriodentalsatelite.com.mx${route}"`), `Wrong canonical: ${file}`);
+  expect(page.includes('hreflang="es-MX"') && page.includes('hreflang="en"') && page.includes('hreflang="x-default"'), `Missing language alternates: ${file}`);
+  expect((page.match(/aria-current="page"/g) ?? []).length >= 1, `Missing active language: ${file}`);
+  const localLinks = [
+    ...page.matchAll(/(?:href|src)="((?!https?:|#|tel:|mailto:)[^"?]+)"/g),
+    ...page.matchAll(/(?:srcset|imagesrcset)="([^"]+)"/g),
+  ];
+  for (const match of localLinks) {
+    for (const item of match[1].split(',')) {
+      const candidate = item.trim().split(/\s+/)[0];
+      const pathname = new URL(candidate, `https://example.com${route}`).pathname;
+      const target = routes.get(pathname) ?? pathname.slice(1);
+      await access(resolve(root, target)).catch(() => failures.push(`Broken link in ${file}: ${candidate}`));
+    }
+  }
+  if (file === 'en/index.html') {
+    expect((page.match(/<details>/g) ?? []).length === 7, 'English treatments missing.');
+    expect((page.match(/class="team-card"/g) ?? []).length === 5, 'English team missing.');
+    expect(page.includes('Open menu') && page.includes('Privacy notice'), 'English interface incomplete.');
+    JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    for (const match of page.matchAll(/href="(https:\/\/wa\.me\/[^"#]+)"/g)) {
+      const url = new URL(match[1]);
+      expect(url.pathname === '/525534360587', 'Wrong English WhatsApp number.');
+      expect(!url.searchParams.has('text') || url.searchParams.get('text').startsWith('Hello,'), 'English WhatsApp message missing.');
+    }
   }
 }
 

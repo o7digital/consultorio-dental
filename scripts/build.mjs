@@ -11,6 +11,7 @@ const files = [
   'robots.txt',
   'sitemap.xml',
   'assets',
+  'en',
 ];
 
 await rm(outputDirectory, { recursive: true, force: true });
