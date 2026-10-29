@@ -70,10 +70,16 @@ const text = labels[lang];
     display: flex;
     align-items: center;
     gap: 12px;
-    width: fit-content;
+    width: max-content;
     min-height: 40px;
     font-size: 14px;
     line-height: 1.5;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
+  .footer-contact-link > span:last-child {
+    flex: none;
   }
 
   .footer-contact-icon {
