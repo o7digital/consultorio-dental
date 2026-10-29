@@ -27,7 +27,7 @@ export const labels = {
     about: 'Nosotros',
     team: 'Equipo',
     contact: 'Contacto',
-    appointment: 'Agendar cita',
+    appointment: 'Agendar una cita',
     backToContact: 'Volver al contacto ↗',
     backToHome: 'Volver al inicio',
     visit: 'VISÍTANOS',

@@ -1,4 +1,5 @@
 ---
+import AppointmentForm from "../../components/AppointmentForm.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 ---
 <SiteLayout lang="en" title={"Dentist in Ciudad Satélite | Consultorio Dental Satélite"} description={"Dentist in Ciudad Satélite, Naucalpan. Personalized preventive, cosmetic and restorative dentistry, dental implants and orthodontics."}>
@@ -52,7 +53,7 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
         <h1>Expert care for your oral health.<br><em>We care for your smile.</em></h1>
         <p class="lead">Preventive, cosmetic and restorative dentistry in one place. A team that listens and supports you with a personalized care plan.</p>
         <div class="actions">
-          <a class="button button-primary" href="https://wa.me/525534360587" target="_blank" rel="noopener">Book your consultation <span>↗</span></a>
+          <a class="button button-primary" href="#contacto" data-appointment-link>Book an appointment <span>→</span></a>
           <a class="text-link" href="#servicios">Explore our treatments <span>↓</span></a>
         </div>
         <div class="trust-row">
@@ -90,37 +91,37 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
         <article class="service-card featured">
           <div class="service-num">01</div><h3>Smile design</h3><p>The shape, colour and position of your teeth all contribute to your smile. We assess them together to suggest changes that suit your expression and oral health.</p>
           <details><summary>What we can improve</summary><p>We examine your teeth, gums and bite and listen to what you would like to change. Depending on your needs, your plan may combine whitening, orthodontics, restorations, veneers or implants.</p><p>Before treatment, we explain the alternatives, the order of each step and the care involved. This helps you make an informed choice with goals suited to your individual case.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20smile%20design." target="_blank" rel="noopener" aria-label="Discuss your smile via WhatsApp">Discuss your smile <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Discuss your smile — appointment form">Discuss your smile <span>↗</span></a>
         </article>
         <article class="service-card">
           <div class="service-num">02</div><h3>Dental implants</h3><p>If one or more teeth are missing, an implant may be a restorative option. A consultation helps you understand the alternatives for eating, speaking and smiling with confidence.</p>
           <details><summary>How an implant is planned</summary><p>A titanium implant is placed in the jawbone to support a crown or prosthetic restoration. It can replace a missing tooth without using neighbouring teeth as supports.</p><p>We assess your gums, available bone and any studies your case requires. We explain the stages of treatment, follow-up and daily hygiene needed to care for the restoration.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20dental%20implants." target="_blank" rel="noopener" aria-label="Discuss an implant via WhatsApp">Discuss an implant <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Discuss an implant — appointment form">Discuss an implant <span>↗</span></a>
         </article>
         <article class="service-card">
           <div class="service-num">03</div><h3>Prevention and diagnosis</h3><p>A check-up helps you understand the health of your teeth and gums, even when nothing hurts. Identifying changes and improving daily care helps guide timely dental attention.</p>
           <details><summary>What your visit includes</summary><p>We examine your teeth, gums, bite, jaw joint and oral tissues. Where needed, photographs or additional studies support the assessment so we can explain the findings and your options.</p><p>You receive guidance on brushing and flossing and, depending on your needs, fluoride or sealants. The timing of check-ups and preventive care is tailored to your oral health.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20prevention%20and%20diagnosis." target="_blank" rel="noopener" aria-label="Book your check-up via WhatsApp">Book your check-up <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Book your check-up — appointment form">Book your check-up <span>↗</span></a>
         </article>
         <article class="service-card">
           <div class="service-num">04</div><h3>Oral surgery</h3><p>Wisdom teeth and other dental concerns may require surgical care. We assess your situation to explain when a procedure may be needed and how to prepare for it.</p>
           <details><summary>Assessment and aftercare</summary><p>An assessment and any appropriate studies help us examine the position of your teeth and nearby tissues. This information guides the decision about whether an extraction or another procedure is needed.</p><p>Depending on your case, we provide wisdom tooth extractions, implant placement, bone preservation or augmentation and gum procedures. We explain preparation, aftercare and follow-up.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20oral%20surgery." target="_blank" rel="noopener" aria-label="Discuss your case via WhatsApp">Discuss your case <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Discuss your case — appointment form">Discuss your case <span>↗</span></a>
         </article>
         <article class="service-card">
           <div class="service-num">05</div><h3>Orthodontics</h3><p>Orthodontics assesses the position of your teeth and how they meet when you bite. Your treatment is chosen around your needs, daily habits and the goals for your smile.</p>
           <details><summary>Braces and clear aligners</summary><p>We offer braces and Invisalign clear aligners. An assessment of your teeth and bite helps us identify suitable options and explain the differences between them.</p><p>Your plan includes appointments to review tooth movement and guidance on hygiene during treatment. We also explain how following instructions and using retainers after treatment help maintain the position of your teeth.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20orthodontics." target="_blank" rel="noopener" aria-label="Explore your options via WhatsApp">Explore your options <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Explore your options — appointment form">Explore your options <span>↗</span></a>
         </article>
         <article class="service-card">
           <div class="service-num">06</div><h3>Root canal treatment</h3><p>When the inside of a tooth is infected, root canal treatment may help preserve it. We first assess the cause of your symptoms and whether this treatment is suitable for your tooth.</p>
           <details><summary>How the inside of a tooth is treated</summary><p>Treatment involves removing infected tissue, cleaning the root canals and sealing them. The aim is to address the infection and help preserve your natural tooth.</p><p>Your assessment allows us to explain the steps and appointments that may be needed. After treatment, we review the restoration required to protect the tooth and restore its function, along with recommended follow-up.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20root%20canal%20treatment." target="_blank" rel="noopener" aria-label="Have your tooth assessed via WhatsApp">Have your tooth assessed <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Have your tooth assessed — appointment form">Have your tooth assessed <span>↗</span></a>
         </article>
         <article class="service-card">
           <div class="service-num">07</div><h3>Dental prosthetics</h3><p>Missing or worn teeth can affect how you eat, speak and smile. Dental prosthetics aim to restore those functions with a solution tailored to your mouth.</p>
           <details><summary>Restoration tailored to you</summary><p>We assess your remaining teeth, gums and bite to consider how to replace missing teeth or restore damaged ones. The choice of prosthetic restoration depends on each person’s needs and oral health.</p><p>We explain the adjustment period, cleaning and daily care involved. Check-ups allow us to assess the fit and support you as you get used to the restoration.</p></details>
-          <a href="https://wa.me/525534360587?text=Hello%2C%20I%20would%20like%20information%20about%20dental%20prosthetics." target="_blank" rel="noopener" aria-label="Discuss a restoration via WhatsApp">Discuss a restoration <span>↗</span></a>
+          <a href="#contacto" data-appointment-link aria-label="Discuss a restoration — appointment form">Discuss a restoration <span>↗</span></a>
         </article>
       </div>
     </section>
@@ -171,17 +172,14 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
     </section>
 
     <section class="contact-section" id="contacto">
-      <div class="section-head"><div><p class="eyebrow"><span></span> Visit us</p><h2>Find us in<br>Ciudad Satélite.</h2></div><p>Contact us to check availability and book your consultation.</p></div>
-      <div class="contact-grid">
-        <div><h3>Address</h3><address>Circuito Historiadores S 44, Local 3<br>Ciudad Satélite, Naucalpan<br>Estado de México, C.P. 53100</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Consultorio%20Dental%20Sat%C3%A9lite%20Circuito%20Historiadores%20S%2044%20Naucalpan" target="_blank" rel="noopener">Get directions <span>↗</span></a></div>
-        <div><h3>Appointments and contact</h3><p>Phone: <a href="tel:+525553938629">55 5393 8629</a><br>WhatsApp: <a href="https://wa.me/525534360587" target="_blank" rel="noopener">55 3436 0587</a></p><a class="text-link" href="https://www.instagram.com/consultorio_dental_satelite/" target="_blank" rel="noopener">Follow us on Instagram <span>↗</span></a></div>
-      </div>
+      <div class="section-head"><div><p class="eyebrow"><span></span> Your next visit</p><h2>Book an appointment.</h2></div><p>Fill in your contact details and preferences. Our team will contact you to confirm availability.</p></div>
+      <AppointmentForm lang="en" />
       <iframe class="contact-map" title="Consultorio Dental Satélite location on Google Maps" src="https://www.google.com/maps?q=Consultorio%20Dental%20Sat%C3%A9lite%20Circuito%20Historiadores%20S%2044%20Naucalpan&amp;output=embed" width="1200" height="420" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </section>
 
     <section class="cta-section">
       <div><p class="eyebrow light"><span></span> Take the first step</p><h2>Your new smile<br>starts here.</h2></div>
-      <div><p>Book a consultation to explore the right treatment for you.</p><a class="button button-white" href="https://wa.me/525534360587" target="_blank" rel="noopener">Book via WhatsApp <span>↗</span></a></div>
+      <div><p>Book a consultation to explore the right treatment for you.</p><a class="button button-white" href="#contacto" data-appointment-link>Book an appointment <span>→</span></a></div>
     </section>
   </main>
 

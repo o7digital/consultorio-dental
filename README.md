@@ -33,6 +33,10 @@ npm run preview
 
 Les routes publiques restent `/`, `/en/`, `/aviso-de-privacidad` et `/en/privacy-notice`. Le format de compilation `preserve` conserve les fichiers HTML correspondants ; Vercel fournit les URL sans extension grâce à `cleanUrls`.
 
+## Demandes de rendez-vous
+
+Le formulaire de la section `#contacto` transmet les demandes à `https://formspree.io/f/xnppzwew`. Son composant est `src/components/AppointmentForm.astro` et la validation ainsi que les retours d’envoi sont dans `src/scripts/appointment.js`. Sans JavaScript, le formulaire utilise directement sa méthode POST vers Formspree.
+
 ## Déploiement
 
 ```sh

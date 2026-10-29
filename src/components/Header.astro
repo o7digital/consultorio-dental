@@ -20,7 +20,7 @@ const text = labels[lang];
         <a href="#nosotros">{text.about}</a>
         <a href="#equipo">{text.team}</a>
         <a href="#contacto">{text.contact}</a>
-        <a class="nav-cta" href={contact.whatsappHref} target="_blank" rel="noopener">{text.appointment} <span>↗</span></a>
+        <a class="nav-cta" href="#contacto" data-appointment-link>{text.appointment} <span>→</span></a>
       </nav>
     </>
   ) : <a href={`${routes.home[lang]}#contacto`}>{text.backToContact}</a>}

@@ -1,0 +1,133 @@
+---
+import { contact, routes, type Language } from '../data/site';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = {
+  es: {
+    formTitle: 'Solicita tu valoración',
+    required: 'Los campos con * son obligatorios.',
+    name: 'Nombre completo',
+    phone: 'Teléfono de contacto',
+    phoneHelp: 'Incluye la clave del país si tu número no es de México.',
+    date: 'Fecha de preferencia',
+    time: 'Preferencia de horario',
+    any: 'Sin preferencia',
+    morning: 'Por la mañana',
+    afternoon: 'Por la tarde',
+    consent: 'He leído el',
+    privacy: 'aviso de privacidad',
+    consentEnd: 'y acepto que utilicen mis datos para atender esta solicitud.',
+    submit: 'Enviar solicitud',
+    note: 'La fecha y el horario son preferencias. Tu cita queda confirmada cuando el equipo se ponga en contacto contigo.',
+    details: 'Planea tu visita',
+    noHistory: 'Para solicitar una cita, no necesitas compartir antecedentes médicos, estudios ni fotografías.',
+    alternative: 'También puedes llamarnos',
+  },
+  en: {
+    formTitle: 'Request your consultation',
+    required: 'Fields marked with * are required.',
+    name: 'Full name',
+    phone: 'Contact phone number',
+    phoneHelp: 'Include your country code if your number is not from Mexico.',
+    date: 'Preferred date',
+    time: 'Preferred time of day',
+    any: 'No preference',
+    morning: 'Morning',
+    afternoon: 'Afternoon',
+    consent: 'I have read the',
+    privacy: 'privacy notice',
+    consentEnd: 'and agree to the use of my details to respond to this request.',
+    submit: 'Send request',
+    note: 'Your chosen date and time are preferences. Your appointment is confirmed when our team contacts you.',
+    details: 'Plan your visit',
+    noHistory: 'You do not need to share medical history, test results or photographs to request an appointment.',
+    alternative: 'You can also call us',
+  },
+}[lang];
+
+---
+  <div class="appointment-layout">
+    <form class="appointment-form" data-appointment-form data-language={lang} action="https://formspree.io/f/xnppzwew" method="post" aria-labelledby="form-title">
+      <input type="hidden" name="_subject" value="Solicitud de cita · Consultorio Dental Satélite" />
+      <input type="hidden" name="language" value={lang} />
+      <div class="form-honeypot" aria-hidden="true"><label for="appointment-website">Website</label><input id="appointment-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+      <h3 id="form-title">{copy.formTitle}</h3>
+      <p class="form-required">{copy.required}</p>
+      <div class="form-field">
+        <label for="appointment-name">{copy.name} <span aria-hidden="true">*</span></label>
+        <input id="appointment-name" name="name" autocomplete="name" required minlength="2" maxlength="100" />
+      </div>
+      <div class="form-field">
+        <label for="appointment-phone">{copy.phone} <span aria-hidden="true">*</span></label>
+        <input id="appointment-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="8" maxlength="25" aria-describedby="phone-help" />
+        <p id="phone-help" class="field-help">{copy.phoneHelp}</p>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="appointment-date">{copy.date}</label>
+          <input id="appointment-date" name="date" type="date" />
+        </div>
+        <div class="form-field">
+          <label for="appointment-time">{copy.time}</label>
+          <select id="appointment-time" name="time">
+            <option value="any">{copy.any}</option>
+            <option value="morning">{copy.morning}</option>
+            <option value="afternoon">{copy.afternoon}</option>
+          </select>
+        </div>
+      </div>
+      <label class="form-consent" for="appointment-consent">
+        <input id="appointment-consent" name="consent" type="checkbox" required />
+        <span>{copy.consent} <a href={routes.privacy[lang]} target="_blank" rel="noopener">{copy.privacy}</a> {copy.consentEnd}</span>
+      </label>
+      <button class="button button-primary form-submit" type="submit"><span data-submit-label>{copy.submit}</span><span aria-hidden="true">→</span></button>
+      <p class="field-help">{copy.note}</p>
+      <p class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+    </form>
+    <aside class="appointment-aside" aria-label={copy.details}>
+      <h3>{copy.details}</h3>
+      <address>{contact.street}<br />{contact.locality}<br />Estado de México, C.P. 53100</address>
+      <p>{copy.noHistory}</p>
+      <div class="appointment-call"><p>{copy.alternative}</p><a href={contact.phoneHref}>{contact.phone}<span aria-hidden="true">↗</span></a></div>
+    </aside>
+  </div>
+
+<script>
+  import '../scripts/appointment.js';
+</script>
+
+<style>
+  .appointment-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:32px;align-items:start}
+  .appointment-form{background:var(--cream);padding:40px;border:1px solid var(--line)}
+  h3{font:500 27px/1.3 Manrope,sans-serif;letter-spacing:-.03em;margin-bottom:12px}
+  .form-required,.field-help{font-size:14px;line-height:1.6;color:var(--muted)}
+  .form-required{margin-bottom:28px}
+  .form-field{display:flex;flex-direction:column;gap:9px;margin-bottom:24px;min-width:0}
+  .form-field label{font-size:15px;font-weight:600;line-height:1.5}
+  .form-field input,.form-field select{width:100%;min-width:0;min-height:50px;padding:12px 14px;border:1px solid var(--line);border-radius:2px;background:var(--white);color:var(--ink2);font:400 16px/1.5 "DM Sans",sans-serif}
+  .form-field input:focus-visible,.form-field select:focus-visible,.form-consent input:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .form-field .field-help{margin:0}
+  .form-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+  .form-consent{display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.6;margin:6px 0 24px;color:var(--muted)}
+  .form-consent input{flex:none;width:18px;height:18px;margin:3px 0 0;accent-color:var(--ink)}
+  .form-consent a{text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
+  .form-submit{width:100%;border:0;cursor:pointer;font-family:inherit;font-size:16px;justify-content:space-between}
+  .form-submit:disabled{cursor:default;opacity:.55}
+  .form-submit:disabled:hover{transform:none;background:var(--ink)}
+  .form-status:empty{display:none}
+  .form-status{font-size:15px;line-height:1.6;padding:16px;background:var(--mint)}
+  .form-status[data-state="error"]{color:#7c2333;background:#fff0f2}
+  .form-honeypot{display:none}
+  .appointment-aside{background:var(--ink2);color:var(--white);padding:36px}
+  .appointment-aside address{font-style:normal;font-size:16px;line-height:1.8;margin:24px 0}
+  .appointment-aside>p{font-size:15px;line-height:1.8;color:var(--accent)}
+  .appointment-call{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2)}
+  .appointment-call p{font-size:14px;color:var(--accent);margin-bottom:12px}
+  .appointment-call a{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:20px;white-space:nowrap}
+  @media(max-width:760px){.appointment-layout{grid-template-columns:1fr}.appointment-form,.appointment-aside{padding:28px}}
+  @media(max-width:420px){.appointment-form,.appointment-aside{padding:24px}.form-row{grid-template-columns:1fr;gap:0}}
+</style>

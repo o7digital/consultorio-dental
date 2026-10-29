@@ -14,7 +14,8 @@ const expect = (condition, message) => {
 };
 
 const matches = (pattern) => html.match(pattern) ?? [];
-const appointmentLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"#]+)"/g)];
+const appointmentLinks = [...html.matchAll(/<a\b[^>]*\bdata-appointment-link\b[^>]*>/g)];
+const whatsappLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"#]+)"/g)];
 
 
 expect(matches(/<h1(?:\s|>)/g).length === 1, 'The page must contain exactly one H1.');
@@ -26,11 +27,13 @@ expect(html.includes('rel="canonical" href="https://'), 'The HTTPS canonical is 
 expect(html.includes('property="og:title"'), 'Open Graph tags are missing.');
 expect(html.includes('"@type": "Dentist"'), 'Dentist structured data is missing.');
 expect(!/(?:href|src)="http:\/\//.test(html), 'An internal HTTP URL remains in the HTML.');
-expect(appointmentLinks.length >= 12, 'Appointment links are missing.');
+expect(appointmentLinks.length >= 10, 'Appointment actions must lead to the booking form.');
+expect(appointmentLinks.every(match => match[0].includes('href="#contacto"')), 'Appointment actions must lead to #contacto.');
 expect(
-  appointmentLinks.every((match) => new URL(match[1]).pathname === '/525534360587'),
-  'Every appointment link must use the requested WhatsApp URL.',
+  whatsappLinks.every((match) => new URL(match[1]).pathname === '/525534360587'),
+  'Direct WhatsApp contact links must use the requested number.',
 );
+expect(!html.includes('Agendar por WhatsApp'), 'The booking CTA must not open WhatsApp directly.');
 expect(/width="\d+" height="\d+"[^>]*alt="[^"]+"/.test(html), 'Images need dimensions and alt text.');
 expect(html.includes('loading="lazy"'), 'Below-the-fold image lazy loading is missing.');
 expect(!html.includes('20+ años') && !html.includes('<cite>'), 'Unverified experience or testimonials remain.');
@@ -66,6 +69,13 @@ for (const [file, language, route] of pages) {
   if (file.includes('privacidad') || file.includes('privacy-notice')) {
     for (const text of ['Lourdes Carrillo Rojas', 'CARL680626156', 'Régimen Simplificado de Confianza (RESICO)']) {
       expect(page.includes(text), `Missing legal identity in ${file}: ${text}`);
+    }
+  }
+  if (file === 'index.html' || file === 'en/index.html') {
+    expect(page.includes('data-appointment-form'), `Missing appointment form: ${file}`);
+    expect(page.includes('action="https://formspree.io/f/xnppzwew"'), `Wrong Formspree endpoint: ${file}`);
+    for (const field of ['name', 'phone', 'date', 'time', 'consent']) {
+      expect(page.includes(`name="${field}"`), `Missing appointment field ${field}: ${file}`);
     }
   }
   const localLinks = [
