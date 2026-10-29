@@ -52,6 +52,7 @@ const text = labels[lang];
   )}
   <div class="footer-bottom">
     <span>© 2026 {contact.brand}</span>
+    <a class="footer-privacy-link" href={page === 'home' ? '#permisos' : `${routes.home[lang]}#permisos`}>{text.permits}</a>
     <a class="footer-privacy-link" href={routes.privacy[lang]} aria-current={page === 'privacy' ? 'page' : undefined}>{text.privacy}</a>
     <span class="site-credit">{text.siteCredit} <a href="https://www.o7digital.com/es/index-digital-agency" target="_blank" rel="noopener noreferrer">o7digital</a></span>
   </div>
