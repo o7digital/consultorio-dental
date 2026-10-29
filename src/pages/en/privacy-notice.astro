@@ -1,28 +1,75 @@
 ---
+import { contact } from "../../data/site";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 ---
-<SiteLayout lang="en" title={"Privacy notice | Consultorio Dental Satélite"} description={"How personal data is processed when you contact Consultorio Dental Satélite and how to exercise your rights."} page="privacy">
+<SiteLayout lang="en" title={"Privacy notice | Consultorio Dental Satélite"} description={"Privacy notice for Consultorio Dental Satélite: patient data, appointments, invoicing and how to exercise ARCO rights."} page="privacy">
   <main class="privacy-page">
     <p class="eyebrow">Information and contact</p>
     <h1>Privacy notice</h1>
     <p class="privacy-date">Last updated: October 29, 2026</p>
-    <h2>Data controller and address</h2>
-    <p><strong>Lourdes Carrillo Rojas</strong>, an individual providing services under the trade name <strong>Consultorio Dental Satélite</strong>, is responsible for processing the personal data you provide when requesting information or an appointment.</p>
+
+    <h2>1. Data controller, address and scope</h2>
+    <p><strong>Lourdes Carrillo Rojas</strong>, an individual providing services under the trade name <strong>Consultorio Dental Satélite</strong>, is responsible for processing the personal data of patients and people requesting information or an appointment, under Mexico’s Federal Law on Protection of Personal Data Held by Private Parties.</p>
     <p><strong>Mexican tax identification number (RFC):</strong> CARL680626156.<br><strong>Tax regime:</strong> Régimen Simplificado de Confianza (RESICO).<br><strong>Practice and tax address:</strong> Circuito Historiadores S 44, Local 3, Ciudad Satélite, Naucalpan, Estado de México, postal code 53100, México.</p>
-    <h2>Personal data and purposes</h2>
-    <p>When you request an appointment through the form or contact us by phone or WhatsApp, we may receive your name, phone number, your preferred date and time of day, and any contact details you choose to share. We use this information to respond, arrange appointments and follow up on your request. You do not need to send clinical information to request an appointment.</p>
-    <p>Health information is sensitive personal data. If your care requires medical history, test results or other clinical data, the practice must explain its purposes and obtain the appropriate consent when required. This notice covers contact through the website; it does not replace the privacy and consent documents associated with your clinical record.</p>
-    <h2>Use, disclosure and retention</h2>
-    <p>The purpose of contact is to address your request. Any additional use requiring your authorization must be explained and consented to separately. You may request limits on the use or disclosure of your information through the channels below. Data retention and deletion are subject to the purpose of your request and applicable legal obligations.</p>
-    <h2>Your rights and how to exercise them</h2>
-    <p>You may request access to, correction or cancellation of your data, or object to its processing (ARCO rights under Mexican law). You may also withdraw consent or limit its use by submitting a written request addressed to Lourdes Carrillo Rojas at Circuito Historiadores S 44, Local 3, Ciudad Satélite, Naucalpan, Estado de México, postal code 53100, México. For guidance on submitting your request, call <a href="tel:+525553938629">55 5393 8629</a> or contact us on <a href="https://wa.me/525534360587" target="_blank" rel="noopener noreferrer">WhatsApp: 55 3436 0587</a>.</p>
-    <p>Include your name, a contact method for our response, the right you wish to exercise and a description of your request. To protect your information, your identity or legal representation will be verified, and only necessary documents will be requested through a channel agreed with you. A response will be sent through your specified channel within applicable legal deadlines. Cancellation and withdrawal of consent may be limited by retention obligations or other legal requirements.</p>
-    <h2>External services and browsing data</h2>
-    <p>The appointment form sends your contact details and visit preferences through Formspree to manage and deliver your request to the practice. This service may process data outside Mexico under its <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">privacy policy</a>. Do not include medical history, diagnoses or other health information in this form.</p>
-    <p>The appointment form does not require an account. This website does not use its own advertising or analytics tools. The hosting provider may process technical connection data, such as IP addresses and access logs, to provide and protect the service.</p>
+    <p>This notice covers dental care at the practice and contact through the website, phone, email or WhatsApp. Patient information is treated confidentially for the purposes described below.</p>
+
+    <h2>2. Personal data we may collect</h2>
+    <p>Depending on the requested service and to the extent necessary for your care, we may collect:</p>
+    <ul>
+      <li>Full name.</li>
+      <li>Address.</li>
+      <li>Mexican tax identification number (RFC) and details needed for invoicing.</li>
+      <li>Home, work and mobile phone numbers.</li>
+      <li>Email address.</li>
+      <li>Other personal details related to your care, such as spouse information, marital status, nationality, education and occupation.</li>
+      <li>Health information: medical conditions, illnesses, treatments and other history needed for dental care.</li>
+      <li>Financial information, such as income or account numbers, when necessary for the stated purposes.</li>
+      <li>Family or other references: name, address, phone number and relationship to the patient.</li>
+    </ul>
+    <p>Not all of these details are requested for every visit. The website form only asks for your name, phone number, preferred date and time of day, and acceptance of the privacy notice. You do not need to send medical history, diagnoses, test results, photographs or financial information to request an appointment.</p>
+
+    <h2>3. Purposes of processing</h2>
+    <p>We use personal data to:</p>
+    <ol>
+      <li>Provide the requested dental services.</li>
+      <li>Create and update the patient’s dental and medical history.</li>
+      <li>Issue invoices.</li>
+      <li>Request, arrange, confirm and follow up on appointments.</li>
+      <li>Prepare prescriptions when appropriate.</li>
+      <li>Request tests or studies when needed.</li>
+      <li>Coordinate consultations with other specialists when required for care.</li>
+      <li>Respond to inquiries received through the practice’s contact channels.</li>
+    </ol>
+    <p>Any additional use requiring your authorization must be explained and consented to separately.</p>
+
+    <h2>4. Health information and consent</h2>
+    <p>Health information is sensitive personal data. When needed for your care, the practice will explain its purposes and obtain express written consent when legally required. Express consent for financial or asset-related information will be requested when applicable, subject to legal exceptions.</p>
+    <p>Sending an appointment request does not replace the consent and privacy documents associated with your care and patient record. Dates and times selected in the form are preferences; your appointment is confirmed when the practice contacts you.</p>
+
+    <h2>5. Confidentiality, security and retention</h2>
+    <p>We apply procedures to prevent unauthorized access, use or disclosure of personal data and to ensure information is used for the purposes set out in this notice. Data is handled confidentially and under applicable law.</p>
+    <p>Retention, blocking and deletion of data are subject to the purposes for which it was collected and applicable legal obligations.</p>
+
+    <h2 id="derechos-arco">6. ARCO rights and how to exercise them</h2>
+    <p>You may request access to, correction or cancellation of your personal data, or object to its processing (ARCO rights under Mexican law). You may also withdraw consent or request limits on use and disclosure.</p>
+    <p>To exercise these rights, you may submit a <strong>simple written letter addressed to Lourdes Carrillo Rojas</strong> to the receptionist on duty at the address stated in this notice, or send it to <a href={`mailto:${contact.privacyEmail}`}>{contact.privacyEmail}</a>.</p>
+    <p>Include your name, a contact method for our response, the right you wish to exercise and a clear description of your request. Your identity or legal representation will be verified, and only necessary documents will be requested through an agreed channel. A response will be provided through your specified channel within applicable legal deadlines. Cancellation or withdrawal of consent may be limited by retention obligations or other legal requirements.</p>
+    <p>For guidance on the procedure, call <a href="tel:+525553938629">55 5393 8629</a> or contact us on <a href="https://wa.me/525534360587" target="_blank" rel="noopener noreferrer">WhatsApp: 55 3436 0587</a>.</p>
+
+    <h2>7. Updating your details and contact preferences</h2>
+    <p>You can use the channels above to update your details and specify how you prefer to receive information about your care. If you do not state a preference, the practice will use one of the contact methods you have provided, solely for the purposes described in this notice.</p>
+
+    <h2>8. Specialist consultations and data sharing</h2>
+    <p>When your care requires other specialists, you will be informed about any relevant sharing of data and consent will be requested when legally required. This notice does not authorize transfers for purposes unrelated to your request or care; applicable legal exceptions and obligations will be observed.</p>
+
+    <h2>9. Website form, external services and browsing</h2>
+    <p>The appointment form sends your contact details and visit preferences through <strong>Formspree</strong> to manage and deliver your request to the practice. This service may process data outside Mexico under its <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">privacy policy</a>. Do not include health or financial information in this form.</p>
+    <p>The website does not require an account and does not use its own advertising or analytics tools. The hosting provider may process technical connection data, such as IP addresses and access logs, to provide and protect the service.</p>
     <p>The contact section embeds Google Maps. When the map loads, Google may receive technical connection data and use cookies according to its <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer">privacy policy</a>. You can manage cookies through your browser.</p>
-    <p>If you choose WhatsApp, Instagram or an external link, the relevant service will process your data under its own policies. This notice does not authorize data transfers for purposes unrelated to your request. When a transfer requires consent, it must be obtained beforehand, except where a legal exemption applies.</p>
-    <h2>Changes and contact</h2>
-    <p>Updates will be published on this page with their revision date. For privacy inquiries, call <a href="tel:+525553938629">55 5393 8629</a>, contact us on <a href="https://wa.me/525534360587" target="_blank" rel="noopener noreferrer">WhatsApp: 55 3436 0587</a> or visit the address provided in this notice.</p>
+    <p>If you choose WhatsApp, Instagram or an external link, the relevant service will process your data under its own policies.</p>
+
+    <h2>10. Changes to this notice and contact</h2>
+    <p>Changes to this notice will be published on this page with their revision date. They will also be communicated by email when you have provided an address for these notices.</p>
+    <p>For privacy inquiries, write to <a href={`mailto:${contact.privacyEmail}`}>{contact.privacyEmail}</a>, call <a href="tel:+525553938629">55 5393 8629</a> or visit the practice address.</p>
   </main>
 </SiteLayout>

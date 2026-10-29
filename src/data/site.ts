@@ -14,6 +14,7 @@ export const contact = {
   phoneHref: 'tel:+525553938629',
   whatsapp: '55 3436 0587',
   whatsappHref: 'https://wa.me/525534360587',
+  privacyEmail: 'lourdescarrillor@yahoo.com.mx',
   instagram: 'https://www.instagram.com/consultorio_dental_satelite/',
 } as const;
 

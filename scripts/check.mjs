@@ -63,15 +63,31 @@ for (const [file, language, route] of pages) {
   expect(page.includes('hreflang="es-MX"') && page.includes('hreflang="en"') && page.includes('hreflang="x-default"'), `Missing language alternates: ${file}`);
   expect((page.match(/aria-current="page"/g) ?? []).length >= 1, `Missing active language: ${file}`);
   expect((page.match(/class="brand-logo"/g) ?? []).length === 2, `Header or footer logo missing: ${file}`);
-  expect(!page.includes('midentista@') && !page.includes('mailto:'), `Unconfirmed email address: ${file}`);
+  expect(!page.includes('midentista@'), `Obsolete email address: ${file}`);
+  const emailLinks = [...page.matchAll(/href="mailto:([^"]+)"/g)];
+  expect(emailLinks.every(match => match[1] === 'lourdescarrillor@yahoo.com.mx'), `Unconfirmed email address: ${file}`);
+  expect(!/(?:href|src)="[^"]+\.pdf(?:[?#][^"]*)?"/i.test(page), `Content must be published as HTML: ${file}`);
   expect(page.includes('Circuito Historiadores S 44, Local 3'), `Wrong address: ${file}`);
   expect((page.match(/<h1(?:\s|>)/g) ?? []).length === 1, `Expected one H1: ${file}`);
   if (file.includes('privacidad') || file.includes('privacy-notice')) {
     for (const text of ['Lourdes Carrillo Rojas', 'CARL680626156', 'Régimen Simplificado de Confianza (RESICO)']) {
       expect(page.includes(text), `Missing legal identity in ${file}: ${text}`);
     }
+    expect(emailLinks.length >= 1, `Missing privacy contact from the supplied notice: ${file}`);
+    const privacyTopics = language === 'es'
+      ? ['historia clínica', 'facturas', 'recetas', 'estudios', 'interconsultas', 'cónyuge', 'número de cuenta', 'recepcionista en turno', 'Formspree', 'Google Maps']
+      : ['patient’s dental and medical history', 'invoices', 'prescriptions', 'studies', 'specialists', 'spouse', 'account numbers', 'receptionist on duty', 'Formspree', 'Google Maps'];
+    for (const topic of privacyTopics) {
+      expect(page.toLowerCase().includes(topic.toLowerCase()), `Missing privacy topic in ${file}: ${topic}`);
+    }
   }
   if (file === 'index.html' || file === 'en/index.html') {
+    const permits = page.match(/<section[^>]*id="permisos"[\s\S]*?<\/section>/)?.[0] ?? '';
+    expect((permits.match(/class="permit-card"/g) ?? []).length === 2, `Missing practice documents: ${file}`);
+    for (const reference of ['00019957', '1624170', '2025-02-12', '2027-12-31', '2022-12-18', 'Universidad Nacional Autónoma de México']) {
+      expect(permits.includes(reference), `Missing permit reference in ${file}: ${reference}`);
+    }
+    expect(!permits.includes('CURP') && !permits.includes('Clave Única'), `Unnecessary personal identifier in practice documentation: ${file}`);
     for (const name of [
       'CD Lourdes Carrillo Rojas',
       'LO Karen Jiménez Márquez',
@@ -102,10 +118,12 @@ for (const [file, language, route] of pages) {
       await access(resolve(root, target)).catch(() => failures.push(`Broken link in ${file}: ${candidate}`));
     }
   }
-  const stylesheet = page.match(/<link[^>]+href="([^\"]+\.css)"/);
-  expect(Boolean(stylesheet), `Missing compiled Astro stylesheet: ${file}`);
-  if (stylesheet) {
-    const builtCss = await readFile(resolve(root, stylesheet[1].replace(/^\//, '')), 'utf8');
+  const stylesheets = [...page.matchAll(/<link[^>]+href="([^"]+\.css)"/g)];
+  expect(stylesheets.length > 0, `Missing compiled Astro stylesheet: ${file}`);
+  if (stylesheets.length) {
+    const builtCss = (await Promise.all(stylesheets.map(stylesheet =>
+      readFile(resolve(root, stylesheet[1].replace(/^\//, '')), 'utf8'),
+    ))).join('\n');
     expect(builtCss.includes('#1f42b2'), `Brand color missing from compiled CSS: ${file}`);
     for (const match of builtCss.matchAll(/url\(["']?(\/assets\/[^\s)'\"]+)/g)) {
       await access(resolve(root, match[1].slice(1))).catch(() => failures.push(`Broken CSS asset: ${match[1]}`));

@@ -1,0 +1,114 @@
+---
+import type { Language } from '../data/site';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = {
+  es: {
+    eyebrow: 'Documentación del consultorio',
+    heading: 'Permisos y registro profesional.',
+    intro: 'Identificación de la licencia municipal del establecimiento y de la cédula profesional de su responsable.',
+    municipal: 'Licencia municipal',
+    licenseTitle: 'Licencia de funcionamiento',
+    licenseIssuer: 'Ayuntamiento de Naucalpan de Juárez · Dirección de Desarrollo y Fomento Económico',
+    reference: 'No. de expediente',
+    holder: 'Titular',
+    activity: 'Giro',
+    activityValue: 'Consultorio dental',
+    procedure: 'Movimiento',
+    procedureValue: 'Revalidación',
+    issued: 'Emisión',
+    startDate: '12 de febrero de 2025',
+    validity: 'Vigencia indicada',
+    endDate: '31 de diciembre de 2027',
+    professional: 'Registro profesional',
+    credentialTitle: 'Cédula profesional',
+    credentialIssuer: 'Secretaría de Educación Pública · Dirección General de Profesiones',
+    credentialReference: 'Número de cédula',
+    qualification: 'Grado',
+    qualificationValue: 'Licenciatura como Cirujano Dentista',
+    university: 'Institución',
+    credentialIssued: 'Expedición electrónica',
+    credentialDate: '18 de diciembre de 2022',
+  },
+  en: {
+    eyebrow: 'Practice documentation',
+    heading: 'Operating license and professional registration.',
+    intro: 'Identification details for the practice’s municipal operating license and its responsible dentist’s professional registration.',
+    municipal: 'Municipal license',
+    licenseTitle: 'Operating license',
+    licenseIssuer: 'Ayuntamiento de Naucalpan de Juárez · Dirección de Desarrollo y Fomento Económico',
+    reference: 'File number',
+    holder: 'Holder',
+    activity: 'Business activity',
+    activityValue: 'Dental practice',
+    procedure: 'Procedure',
+    procedureValue: 'Renewal',
+    issued: 'Issued',
+    startDate: 'February 12, 2025',
+    validity: 'Stated validity',
+    endDate: 'December 31, 2027',
+    professional: 'Professional registration',
+    credentialTitle: 'Professional license',
+    credentialIssuer: 'Secretaría de Educación Pública · Dirección General de Profesiones',
+    credentialReference: 'License number',
+    qualification: 'Qualification',
+    qualificationValue: 'Degree in dental surgery (Licenciatura como Cirujano Dentista)',
+    university: 'Institution',
+    credentialIssued: 'Electronic issue date',
+    credentialDate: 'December 18, 2022',
+  },
+}[lang];
+---
+<section class="permits-section" id="permisos" aria-labelledby="permits-title">
+  <div class="section-head">
+    <div><p class="eyebrow"><span></span>{copy.eyebrow}</p><h2 id="permits-title">{copy.heading}</h2></div>
+    <p>{copy.intro}</p>
+  </div>
+  <div class="permits-grid">
+    <article class="permit-card">
+      <p class="permit-type">{copy.municipal}</p>
+      <h3>{copy.licenseTitle}</h3>
+      <p class="permit-issuer">{copy.licenseIssuer}</p>
+      <dl>
+        <div><dt>{copy.reference}</dt><dd class="permit-reference">00019957</dd></div>
+        <div><dt>{copy.holder}</dt><dd>Lourdes Carrillo Rojas</dd></div>
+        <div><dt>{copy.activity}</dt><dd>{copy.activityValue}</dd></div>
+        <div><dt>{copy.procedure}</dt><dd>{copy.procedureValue}</dd></div>
+        <div><dt>{copy.issued}</dt><dd><time datetime="2025-02-12">{copy.startDate}</time></dd></div>
+        <div><dt>{copy.validity}</dt><dd><time datetime="2027-12-31">{copy.endDate}</time></dd></div>
+      </dl>
+    </article>
+    <article class="permit-card">
+      <p class="permit-type">{copy.professional}</p>
+      <h3>{copy.credentialTitle}</h3>
+      <p class="permit-issuer">{copy.credentialIssuer}</p>
+      <dl>
+        <div><dt>{copy.credentialReference}</dt><dd class="permit-reference">1624170</dd></div>
+        <div><dt>{copy.holder}</dt><dd>Lourdes Carrillo Rojas</dd></div>
+        <div><dt>{copy.qualification}</dt><dd>{copy.qualificationValue}</dd></div>
+        <div><dt>{copy.university}</dt><dd>Universidad Nacional Autónoma de México</dd></div>
+        <div><dt>{copy.credentialIssued}</dt><dd><time datetime="2022-12-18">{copy.credentialDate}</time></dd></div>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<style>
+  .permits-section{padding:8vw 4.5vw;background:var(--cream)}
+  .permits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+  .permit-card{padding:36px;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--ink);min-width:0}
+  .permit-type{font:600 12px/1.5 Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+  h3{font:500 28px/1.2 Manrope,sans-serif;letter-spacing:-.035em;margin-bottom:20px}
+  .permit-issuer{font-size:15px;line-height:1.7;color:var(--muted);margin-bottom:28px}
+  dl{margin:0}
+  dl>div{display:grid;grid-template-columns:145px minmax(0,1fr);gap:18px;padding:16px 0;border-top:1px solid var(--line)}
+  dt{font-size:13px;font-weight:600;line-height:1.7;color:var(--muted)}
+  dd{margin:0;font-size:16px;line-height:1.7;overflow-wrap:anywhere}
+  .permit-reference{font-weight:600;white-space:nowrap}
+  @media(max-width:900px){.permits-section{padding:80px 22px}.permit-card{padding:28px}dl>div{grid-template-columns:1fr;gap:5px}}
+  @media(max-width:650px){.permits-grid{grid-template-columns:1fr}.permits-section{padding:70px 22px}.permit-card{padding:26px}}
+</style>

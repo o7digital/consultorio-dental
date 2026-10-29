@@ -1,5 +1,6 @@
 ---
 import AppointmentForm from "../../components/AppointmentForm.astro";
+import Permits from "../../components/Permits.astro";
 import Team from "../../components/Team.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 ---
@@ -135,9 +136,11 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
         <p>Meet the people supporting you at our practice: dental care professionals, reception and support staff who look after every detail of your visit with a personal approach.</p>
         <div class="stats"><div><strong>Comprehensive</strong><span>Different areas of dentistry in one place</span></div><div><strong>Personalized</strong><span>Plans tailored to your needs</span></div></div>
         <a class="button button-light" href="#equipo">Meet the team <span>→</span></a>
+        <a class="about-permits-link" href="#permisos">Operating license and professional registration <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
+    <Permits lang="en" />
     <Team lang="en" />
     <section class="technology" id="tecnologia">
       <div class="section-head"><div><p class="eyebrow"><span></span> Technology</p><h2>Tools for<br>precise care.</h2></div><p>Digital tools that help us assess your case and plan your treatment.</p></div>
