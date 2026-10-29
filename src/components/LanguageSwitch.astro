@@ -1,0 +1,11 @@
+---
+import { labels, routes, type Language, type PageKind } from '../data/site';
+
+interface Props {
+  lang: Language;
+  page: PageKind;
+}
+
+const { lang, page } = Astro.props;
+---
+<div class="language-switch" role="group" aria-label={labels[lang].language}><a href={routes[page].es} lang="es" hreflang="es-MX" aria-label="Español" aria-current={lang === 'es' ? 'page' : undefined}>ES</a><span aria-hidden="true">/</span><a href={routes[page].en} lang="en" hreflang="en" aria-label="English" aria-current={lang === 'en' ? 'page' : undefined}>EN</a></div>

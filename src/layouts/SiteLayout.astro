@@ -1,0 +1,42 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { contact, labels, routes, type Language, type PageKind } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  page?: PageKind;
+}
+
+const { lang, title, description, page = 'home' } = Astro.props;
+const canonical = new URL(routes[page][lang], Astro.site);
+const spanish = new URL(routes[page].es, Astro.site);
+const english = new URL(routes[page].en, Astro.site);
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1f42b2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" href="/assets/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+    <link rel="alternate" hreflang="es-MX" href={spanish} />
+    <link rel="alternate" hreflang="en" href={english} />
+    <link rel="alternate" hreflang="x-default" href={spanish} />
+  </head>
+  <body>
+    <Header lang={lang} page={page} />
+    <slot />
+    <Footer lang={lang} page={page} />
+    {page === 'home' && <a class="whatsapp" href={contact.whatsappHref} target="_blank" rel="noopener" aria-label={labels[lang].whatsapp}>⌁</a>}
+  </body>
+</html>

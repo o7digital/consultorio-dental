@@ -1,0 +1,26 @@
+---
+import { contact, labels, routes, type Language, type PageKind } from '../data/site';
+
+interface Props {
+  lang: Language;
+  page: PageKind;
+}
+
+const { lang, page } = Astro.props;
+const text = labels[lang];
+---
+<footer>
+  <div class="footer-brand"><a class="brand" href={routes.home[lang]} aria-label={`${contact.brand} — ${text.home}`}><img class="brand-logo" src="/assets/logo-dental-satelite-white.svg" width="700" height="254" alt="Dental Satélite" loading="lazy" decoding="async" /></a></div>
+  {page === 'home' ? (
+    <>
+      <div><small>{text.visit}</small><address>{contact.street}<br />{contact.locality}</address></div>
+      <div><small>{text.footerContact}</small><p><a href={contact.phoneHref}>{contact.phone}</a><br />WhatsApp: <a href={contact.whatsappHref} target="_blank" rel="noopener">{contact.whatsapp}</a><br /><a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label={text.instagram}>Instagram</a></p></div>
+    </>
+  ) : (
+    <>
+      <div><a href={`${routes.home[lang]}#contacto`}>{text.contact}</a></div>
+      <div><a href={routes.home[lang]}>{text.backToHome}</a></div>
+    </>
+  )}
+  <div class="footer-bottom"><span>© 2026 {contact.brand}</span><a href={routes.privacy[lang]} aria-current={page === 'privacy' ? 'page' : undefined}>{text.privacy}</a>{page === 'home' && <a href="#contacto">Ciudad Satélite · Naucalpan</a>}</div>
+</footer>

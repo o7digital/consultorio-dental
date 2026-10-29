@@ -1,0 +1,28 @@
+---
+import LanguageSwitch from './LanguageSwitch.astro';
+import { contact, labels, routes, type Language, type PageKind } from '../data/site';
+
+interface Props {
+  lang: Language;
+  page: PageKind;
+}
+
+const { lang, page } = Astro.props;
+const text = labels[lang];
+---
+<header class="site-header">
+  <a class="brand" href={routes.home[lang]} aria-label={`${contact.brand} — ${text.home}`}><img class="brand-logo" src="/assets/logo-dental-satelite.svg" width="700" height="254" alt="Dental Satélite" decoding="async" /></a>
+  {page === 'home' ? (
+    <>
+      <button class="menu" type="button" aria-label={text.menu} aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+      <nav id="main-navigation" aria-label={text.navigation}>
+        <a href="#servicios">{text.treatments}</a>
+        <a href="#nosotros">{text.about}</a>
+        <a href="#equipo">{text.team}</a>
+        <a href="#contacto">{text.contact}</a>
+        <a class="nav-cta" href={contact.whatsappHref} target="_blank" rel="noopener">{text.appointment} <span>↗</span></a>
+      </nav>
+    </>
+  ) : <a href={`${routes.home[lang]}#contacto`}>{text.backToContact}</a>}
+  <LanguageSwitch lang={lang} page={page} />
+</header>

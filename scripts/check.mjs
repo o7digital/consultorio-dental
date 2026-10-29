@@ -1,10 +1,12 @@
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const root = resolve(import.meta.dirname, '..');
+// Check Astro's rendered output: checking .astro source would miss build regressions.
+const projectRoot = resolve(import.meta.dirname, '..');
+const root = resolve(projectRoot, 'dist');
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
-const css = await readFile(resolve(root, 'styles.css'), 'utf8');
-const script = await readFile(resolve(root, 'script.js'), 'utf8');
+const css = await readFile(resolve(projectRoot, 'src/styles/global.css'), 'utf8');
+const script = await readFile(resolve(projectRoot, 'src/scripts/site.js'), 'utf8');
 const failures = [];
 
 const expect = (condition, message) => {
@@ -57,6 +59,15 @@ for (const [file, language, route] of pages) {
   expect(page.includes(`rel="canonical" href="https://consultoriodentalsatelite.com.mx${route}"`), `Wrong canonical: ${file}`);
   expect(page.includes('hreflang="es-MX"') && page.includes('hreflang="en"') && page.includes('hreflang="x-default"'), `Missing language alternates: ${file}`);
   expect((page.match(/aria-current="page"/g) ?? []).length >= 1, `Missing active language: ${file}`);
+  expect((page.match(/class="brand-logo"/g) ?? []).length === 2, `Header or footer logo missing: ${file}`);
+  expect(!page.includes('midentista@') && !page.includes('mailto:'), `Unconfirmed email address: ${file}`);
+  expect(page.includes('Circuito Historiadores S 44, Local 3'), `Wrong address: ${file}`);
+  expect((page.match(/<h1(?:\s|>)/g) ?? []).length === 1, `Expected one H1: ${file}`);
+  if (file.includes('privacidad') || file.includes('privacy-notice')) {
+    for (const text of ['Lourdes Carrillo Rojas', 'CARL680626156', 'Régimen Simplificado de Confianza (RESICO)']) {
+      expect(page.includes(text), `Missing legal identity in ${file}: ${text}`);
+    }
+  }
   const localLinks = [
     ...page.matchAll(/(?:href|src)="((?!https?:|#|tel:|mailto:)[^"?]+)"/g),
     ...page.matchAll(/(?:srcset|imagesrcset)="([^"]+)"/g),
@@ -68,6 +79,18 @@ for (const [file, language, route] of pages) {
       const target = routes.get(pathname) ?? pathname.slice(1);
       await access(resolve(root, target)).catch(() => failures.push(`Broken link in ${file}: ${candidate}`));
     }
+  }
+  const stylesheet = page.match(/<link[^>]+href="([^\"]+\.css)"/);
+  expect(Boolean(stylesheet), `Missing compiled Astro stylesheet: ${file}`);
+  if (stylesheet) {
+    const builtCss = await readFile(resolve(root, stylesheet[1].replace(/^\//, '')), 'utf8');
+    expect(builtCss.includes('#1f42b2'), `Brand color missing from compiled CSS: ${file}`);
+    for (const match of builtCss.matchAll(/url\(["']?(\/assets\/[^\s)'\"]+)/g)) {
+      await access(resolve(root, match[1].slice(1))).catch(() => failures.push(`Broken CSS asset: ${match[1]}`));
+    }
+  }
+  if (route === '/' || route === '/en/') {
+    expect(/<script[^>]+type="module"[^>]+src="\/_astro\//.test(page), `Missing bundled interactions: ${file}`);
   }
   if (file === 'en/index.html') {
     expect((page.match(/<details>/g) ?? []).length === 7, 'English treatments missing.');
@@ -93,4 +116,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('HTML, assets, SEO, and appointment-link checks passed.');
+console.log('Astro output, bilingual routes, assets, branding, legal identity, SEO, and appointment-link checks passed.');
