@@ -10,58 +10,50 @@ const copy = {
   es: {
     eyebrow: 'Documentación del consultorio',
     heading: 'Permisos y registro profesional.',
-    intro: 'Identificación de la licencia municipal del establecimiento y de la cédula profesional de su responsable.',
+    intro: 'Consulta los documentos del consultorio. Selecciona una fotografía para verla en grande.',
     municipal: 'Licencia municipal',
     licenseTitle: 'Licencia de funcionamiento',
-    licenseIssuer: 'Ayuntamiento de Naucalpan de Juárez · Dirección de Desarrollo y Fomento Económico',
+    licenseAlt: 'Fotografía de la licencia de funcionamiento de Consultorio Dental Satélite, expediente 00019957, a nombre de Lourdes Carrillo Rojas',
+    licenseOpen: 'Ampliar la fotografía de la licencia de funcionamiento',
     reference: 'No. de expediente',
-    holder: 'Titular',
-    activity: 'Giro',
-    activityValue: 'Consultorio dental',
-    procedure: 'Movimiento',
-    procedureValue: 'Revalidación',
     issued: 'Emisión',
     startDate: '12 de febrero de 2025',
     validity: 'Vigencia indicada',
     endDate: '31 de diciembre de 2027',
     professional: 'Registro profesional',
     credentialTitle: 'Cédula profesional',
-    credentialIssuer: 'Secretaría de Educación Pública · Dirección General de Profesiones',
+    credentialAlt: 'Imagen de la cédula profesional 1624170 de Lourdes Carrillo Rojas, Licenciatura como Cirujano Dentista de la Universidad Nacional Autónoma de México',
+    credentialOpen: 'Ampliar la imagen de la cédula profesional de Lourdes Carrillo Rojas',
     credentialReference: 'Número de cédula',
-    qualification: 'Grado',
-    qualificationValue: 'Licenciatura como Cirujano Dentista',
-    university: 'Institución',
     credentialIssued: 'Expedición electrónica',
     credentialDate: '18 de diciembre de 2022',
+    enlarge: 'Ver documento en grande',
   },
   en: {
     eyebrow: 'Practice documentation',
     heading: 'Operating license and professional registration.',
-    intro: 'Identification details for the practice’s municipal operating license and its responsible dentist’s professional registration.',
+    intro: 'View the practice’s documents. Select a photograph to see it at full size.',
     municipal: 'Municipal license',
     licenseTitle: 'Operating license',
-    licenseIssuer: 'Ayuntamiento de Naucalpan de Juárez · Dirección de Desarrollo y Fomento Económico',
+    licenseAlt: 'Photograph of the operating license for Consultorio Dental Satélite, file 00019957, held by Lourdes Carrillo Rojas',
+    licenseOpen: 'Enlarge the photograph of the operating license',
     reference: 'File number',
-    holder: 'Holder',
-    activity: 'Business activity',
-    activityValue: 'Dental practice',
-    procedure: 'Procedure',
-    procedureValue: 'Renewal',
     issued: 'Issued',
     startDate: 'February 12, 2025',
     validity: 'Stated validity',
     endDate: 'December 31, 2027',
     professional: 'Professional registration',
     credentialTitle: 'Professional license',
-    credentialIssuer: 'Secretaría de Educación Pública · Dirección General de Profesiones',
+    credentialAlt: 'Image of professional license 1624170 for Lourdes Carrillo Rojas, degree in dental surgery from Universidad Nacional Autónoma de México',
+    credentialOpen: 'Enlarge the image of Lourdes Carrillo Rojas’s professional license',
     credentialReference: 'License number',
-    qualification: 'Qualification',
-    qualificationValue: 'Degree in dental surgery (Licenciatura como Cirujano Dentista)',
-    university: 'Institution',
     credentialIssued: 'Electronic issue date',
     credentialDate: 'December 18, 2022',
+    enlarge: 'View full-size document',
   },
 }[lang];
+
+const imageSizes = '(max-width: 650px) calc(100vw - 76px), calc((100vw - 9vw - 88px) / 2)';
 ---
 <section class="permits-section" id="permisos" aria-labelledby="permits-title">
   <div class="section-head">
@@ -69,46 +61,48 @@ const copy = {
     <p>{copy.intro}</p>
   </div>
   <div class="permits-grid">
-    <article class="permit-card">
-      <p class="permit-type">{copy.municipal}</p>
-      <h3>{copy.licenseTitle}</h3>
-      <p class="permit-issuer">{copy.licenseIssuer}</p>
-      <dl>
-        <div><dt>{copy.reference}</dt><dd class="permit-reference">00019957</dd></div>
-        <div><dt>{copy.holder}</dt><dd>Lourdes Carrillo Rojas</dd></div>
-        <div><dt>{copy.activity}</dt><dd>{copy.activityValue}</dd></div>
-        <div><dt>{copy.procedure}</dt><dd>{copy.procedureValue}</dd></div>
-        <div><dt>{copy.issued}</dt><dd><time datetime="2025-02-12">{copy.startDate}</time></dd></div>
-        <div><dt>{copy.validity}</dt><dd><time datetime="2027-12-31">{copy.endDate}</time></dd></div>
-      </dl>
-    </article>
-    <article class="permit-card">
-      <p class="permit-type">{copy.professional}</p>
-      <h3>{copy.credentialTitle}</h3>
-      <p class="permit-issuer">{copy.credentialIssuer}</p>
-      <dl>
-        <div><dt>{copy.credentialReference}</dt><dd class="permit-reference">1624170</dd></div>
-        <div><dt>{copy.holder}</dt><dd>Lourdes Carrillo Rojas</dd></div>
-        <div><dt>{copy.qualification}</dt><dd>{copy.qualificationValue}</dd></div>
-        <div><dt>{copy.university}</dt><dd>Universidad Nacional Autónoma de México</dd></div>
-        <div><dt>{copy.credentialIssued}</dt><dd><time datetime="2022-12-18">{copy.credentialDate}</time></dd></div>
-      </dl>
-    </article>
+    <figure class="permit-card">
+      <a class="permit-photo" href="/assets/permits/licencia-funcionamiento.jpg" target="_blank" rel="noopener" aria-label={copy.licenseOpen}>
+        <img src="/assets/permits/licencia-funcionamiento-1280.webp" srcset="/assets/permits/licencia-funcionamiento-640.webp 640w, /assets/permits/licencia-funcionamiento-1280.webp 1280w" sizes={imageSizes} width="2550" height="3300" alt={copy.licenseAlt} loading="lazy" decoding="async" />
+      </a>
+      <figcaption>
+        <p class="permit-type">{copy.municipal}</p>
+        <h3>{copy.licenseTitle}</h3>
+        <p>{copy.reference}: <strong class="permit-reference">00019957</strong> · Lourdes Carrillo Rojas</p>
+        <p class="permit-dates">{copy.issued}: <time datetime="2025-02-12">{copy.startDate}</time><br />{copy.validity}: <time datetime="2027-12-31">{copy.endDate}</time></p>
+        <a class="permit-open" href="/assets/permits/licencia-funcionamiento.jpg" target="_blank" rel="noopener">{copy.enlarge}<span aria-hidden="true">↗</span></a>
+      </figcaption>
+    </figure>
+    <figure class="permit-card">
+      <a class="permit-photo" href="/assets/permits/cedula-lourdes-carrillo.jpg" target="_blank" rel="noopener" aria-label={copy.credentialOpen}>
+        <img src="/assets/permits/cedula-lourdes-carrillo-1280.webp" srcset="/assets/permits/cedula-lourdes-carrillo-640.webp 640w, /assets/permits/cedula-lourdes-carrillo-1280.webp 1280w" sizes={imageSizes} width="2344" height="3064" alt={copy.credentialAlt} loading="lazy" decoding="async" />
+      </a>
+      <figcaption>
+        <p class="permit-type">{copy.professional}</p>
+        <h3>{copy.credentialTitle}</h3>
+        <p>{copy.credentialReference}: <strong class="permit-reference">1624170</strong> · Lourdes Carrillo Rojas</p>
+        <p>Universidad Nacional Autónoma de México</p>
+        <p class="permit-dates">{copy.credentialIssued}: <time datetime="2022-12-18">{copy.credentialDate}</time></p>
+        <a class="permit-open" href="/assets/permits/cedula-lourdes-carrillo.jpg" target="_blank" rel="noopener">{copy.enlarge}<span aria-hidden="true">↗</span></a>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
 <style>
   .permits-section{padding:8vw 4.5vw;background:var(--cream)}
-  .permits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-  .permit-card{padding:36px;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--ink);min-width:0}
-  .permit-type{font:600 12px/1.5 Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
-  h3{font:500 28px/1.2 Manrope,sans-serif;letter-spacing:-.035em;margin-bottom:20px}
-  .permit-issuer{font-size:15px;line-height:1.7;color:var(--muted);margin-bottom:28px}
-  dl{margin:0}
-  dl>div{display:grid;grid-template-columns:145px minmax(0,1fr);gap:18px;padding:16px 0;border-top:1px solid var(--line)}
-  dt{font-size:13px;font-weight:600;line-height:1.7;color:var(--muted)}
-  dd{margin:0;font-size:16px;line-height:1.7;overflow-wrap:anywhere}
-  .permit-reference{font-weight:600;white-space:nowrap}
-  @media(max-width:900px){.permits-section{padding:80px 22px}.permit-card{padding:28px}dl>div{grid-template-columns:1fr;gap:5px}}
-  @media(max-width:650px){.permits-grid{grid-template-columns:1fr}.permits-section{padding:70px 22px}.permit-card{padding:26px}}
+  .permits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+  .permit-card{margin:0;background:var(--white);border:1px solid var(--line);min-width:0;overflow:hidden}
+  .permit-photo{display:block;aspect-ratio:3/4;padding:16px;background:var(--white);border-bottom:1px solid var(--line);cursor:zoom-in}
+  .permit-photo img{width:100%;height:100%;object-fit:contain}
+  figcaption{padding:28px}
+  .permit-type{font:600 12px/1.5 Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  h3{font:500 27px/1.2 Manrope,sans-serif;letter-spacing:-.035em;margin-bottom:18px}
+  figcaption>p:not(.permit-type){font-size:15px;line-height:1.7;margin-bottom:16px}
+  figcaption>.permit-dates{font-size:14px;color:var(--muted)}
+  .permit-reference{white-space:nowrap}
+  .permit-open{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:15px;font-weight:600;line-height:1.5}
+  .permit-open span{flex:none}
+  @media(max-width:900px){.permits-section{padding:80px 22px}figcaption{padding:24px}}
+  @media(max-width:650px){.permits-grid{grid-template-columns:1fr}.permits-section{padding:70px 22px}}
 </style>

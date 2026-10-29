@@ -84,6 +84,11 @@ for (const [file, language, route] of pages) {
   if (file === 'index.html' || file === 'en/index.html') {
     const permits = page.match(/<section[^>]*id="permisos"[\s\S]*?<\/section>/)?.[0] ?? '';
     expect((permits.match(/class="permit-card"/g) ?? []).length === 2, `Missing practice documents: ${file}`);
+    expect((permits.match(/class="permit-photo"/g) ?? []).length === 2, `Both permit photographs must be visible: ${file}`);
+    for (const document of ['licencia-funcionamiento', 'cedula-lourdes-carrillo']) {
+      expect(permits.includes(`href="/assets/permits/${document}.jpg"`), `Missing full-size permit photo: ${file}`);
+      expect(permits.includes(`src="/assets/permits/${document}-1280.webp"`), `Missing inline permit photo: ${file}`);
+    }
     for (const reference of ['00019957', '1624170', '2025-02-12', '2027-12-31', '2022-12-18', 'Universidad Nacional Autónoma de México']) {
       expect(permits.includes(reference), `Missing permit reference in ${file}: ${reference}`);
     }
