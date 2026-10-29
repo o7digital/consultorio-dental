@@ -34,6 +34,7 @@ export const labels = {
     footerContact: 'CONTACTO',
     privacy: 'Aviso de privacidad',
     instagram: 'Consultorio Dental Satélite en Instagram',
+    phone: 'Llamar por teléfono',
     whatsapp: 'Contactar por WhatsApp',
   },
   en: {
@@ -52,6 +53,7 @@ export const labels = {
     footerContact: 'CONTACT',
     privacy: 'Privacy notice',
     instagram: 'Consultorio Dental Satélite on Instagram',
+    phone: 'Call by phone',
     whatsapp: 'Contact us on WhatsApp',
   },
 } as const;
