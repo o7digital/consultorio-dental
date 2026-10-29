@@ -50,7 +50,12 @@ const text = labels[lang];
       <div><a href={routes.home[lang]}>{text.backToHome}</a></div>
     </>
   )}
-  <div class="footer-bottom"><span>© 2026 {contact.brand}</span><a href={routes.privacy[lang]} aria-current={page === 'privacy' ? 'page' : undefined}>{text.privacy}</a>{page === 'home' && <a href="#contacto">Ciudad Satélite · Naucalpan</a>}</div>
+  <div class="footer-bottom">
+    <span>© 2026 {contact.brand}</span>
+    <a class="footer-privacy-link" href={routes.privacy[lang]} aria-current={page === 'privacy' ? 'page' : undefined}>{text.privacy}</a>
+    {page === 'home' && <a href="#contacto">Ciudad Satélite · Naucalpan</a>}
+    <span class="site-credit">{text.siteCredit} <a href="https://www.o7digital.com/es/index-digital-agency" target="_blank" rel="noopener noreferrer">o7digital</a></span>
+  </div>
 </footer>
 
 <style>
@@ -68,7 +73,7 @@ const text = labels[lang];
     gap: 12px;
     width: fit-content;
     min-height: 40px;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
   }
 
@@ -90,5 +95,40 @@ const text = labels[lang];
 
   .footer-contact-link:focus-visible {
     outline-color: var(--accent);
+  }
+
+  .footer-bottom {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    padding-right: 64px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .footer-privacy-link {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .site-credit a {
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    white-space: nowrap;
+  }
+
+  .site-credit a:focus-visible {
+    outline-color: var(--accent);
+  }
+
+  @media (max-width: 560px) {
+    .footer-bottom {
+      align-items: flex-start;
+    }
   }
 </style>
