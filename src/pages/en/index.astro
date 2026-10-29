@@ -1,5 +1,6 @@
 ---
 import AppointmentForm from "../../components/AppointmentForm.astro";
+import Team from "../../components/Team.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 ---
 <SiteLayout lang="en" title={"Dentist in Ciudad Satélite | Consultorio Dental Satélite"} description={"Dentist in Ciudad Satélite, Naucalpan. Personalized preventive, cosmetic and restorative dentistry, dental implants and orthodontics."}>
@@ -130,23 +131,14 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
       <div class="about-image reveal"><img src="/assets/team.webp" srcset="/assets/team-800.webp 800w, /assets/team.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="1200" alt="The Consultorio Dental Satélite team at the practice" loading="lazy" decoding="async"><span>You are in caring hands.</span></div>
       <div class="about-copy reveal delay">
         <p class="eyebrow light"><span></span> What defines us</p>
-        <h2>Clinical excellence.<br><em>A personal approach.</em></h2>
-        <p>Meet our dental care team. We pay attention to every detail to offer a professional, personal dental experience.</p>
+        <h2>Dental care.<br><em>A personal approach.</em></h2>
+        <p>Meet the people supporting you at our practice: dental care professionals, reception and support staff who look after every detail of your visit with a personal approach.</p>
         <div class="stats"><div><strong>Comprehensive</strong><span>Different areas of dentistry in one place</span></div><div><strong>Personalized</strong><span>Plans tailored to your needs</span></div></div>
         <a class="button button-light" href="#equipo">Meet the team <span>→</span></a>
       </div>
     </section>
 
-    <section class="team-section" id="equipo">
-      <div class="section-head"><div><p class="eyebrow"><span></span> Our team</p><h2>Meet the people<br>caring for your smile.</h2></div><p>Professionals who support you with personal attention and a plan designed for you.</p></div>
-      <div class="team-grid">
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Space reserved for the clinician’s photograph"></div><p class="team-role">Dentist in charge</p><h3>Lourdes Carrillo Rojas</h3><p>Dental surgeon</p><p class="credential">Professional license 1624170 · UNAM</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Space reserved for the clinician’s photograph"></div><p class="team-role">Clinical team</p><h3>Karen Jiménez Marquez</h3><p>Degree in dentistry</p><p class="credential">Professional license 11940440 · UCAD</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Space reserved for the clinician’s photograph"></div><p class="team-role">Clinical team</p><h3>Xóchitl Felix Roldán</h3><p>Dental surgeon</p><p class="credential">Professional license 15202278 · UNAM</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Space reserved for the clinician’s photograph"></div><p class="team-role">Clinical team</p><h3>Juan Carlos Cervantes Riquelme</h3><p>Dental surgeon</p><p class="credential">Professional license 9822972 · UNITEC</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Space reserved for the clinician’s photograph"></div><p class="team-role">Clinical team</p><h3>Iván Barrera Hernández</h3><p>Dental surgeon</p><p class="credential">Professional license 5864972</p></article>
-      </div>
-    </section>
+    <Team lang="en" />
     <section class="technology" id="tecnologia">
       <div class="section-head"><div><p class="eyebrow"><span></span> Technology</p><h2>Tools for<br>precise care.</h2></div><p>Digital tools that help us assess your case and plan your treatment.</p></div>
       <div class="digital-grid">

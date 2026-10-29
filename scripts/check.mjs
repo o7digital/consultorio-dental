@@ -38,7 +38,7 @@ expect(/width="\d+" height="\d+"[^>]*alt="[^"]+"/.test(html), 'Images need dimen
 expect(html.includes('loading="lazy"'), 'Below-the-fold image lazy loading is missing.');
 expect(!html.includes('20+ años') && !html.includes('<cite>'), 'Unverified experience or testimonials remain.');
 expect(html.includes('Escáner intraoral') && html.includes('Radiografía digital'), 'Confirmed technology is missing.');
-expect(matches(/class="team-card"/g).length === 5, 'Expected five clinicians.');
+expect(matches(/class="team-card"/g).length === 8, 'Expected eight team members.');
 expect(matches(/<details>/g).length === 7, 'Expected seven treatment descriptions.');
 expect(html.includes('tel:+525553938629'), 'The clinic phone is missing.');
 const sectionIds = new Set([...html.matchAll(/id="([^"]+)"/g)].map(match => match[1]));
@@ -72,6 +72,18 @@ for (const [file, language, route] of pages) {
     }
   }
   if (file === 'index.html' || file === 'en/index.html') {
+    for (const name of [
+      'CD Lourdes Carrillo Rojas',
+      'LO Karen Jiménez Márquez',
+      'CD Xóchitl Felix Roldán',
+      'CDEO Juan Carlos Cervantes Riquelme',
+      'CD Cesar Ojeda Vallesillo',
+      'LCD Iván Barrera Hernández',
+      'Betzabe Vázquez Torres',
+      'Ana Ramos Castillo',
+    ]) {
+      expect(page.includes(`<h3>${name}</h3>`), `Missing or incorrect team member in ${file}: ${name}`);
+    }
     expect(page.includes('data-appointment-form'), `Missing appointment form: ${file}`);
     expect(page.includes('action="https://formspree.io/f/xnppzwew"'), `Wrong Formspree endpoint: ${file}`);
     for (const field of ['name', 'phone', 'date', 'time', 'consent']) {
@@ -104,7 +116,7 @@ for (const [file, language, route] of pages) {
   }
   if (file === 'en/index.html') {
     expect((page.match(/<details>/g) ?? []).length === 7, 'English treatments missing.');
-    expect((page.match(/class="team-card"/g) ?? []).length === 5, 'English team missing.');
+    expect((page.match(/class="team-card"/g) ?? []).length === 8, 'English team incomplete.');
     expect(page.includes('Open menu') && page.includes('Privacy notice'), 'English interface incomplete.');
     JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     for (const match of page.matchAll(/href="(https:\/\/wa\.me\/[^"#]+)"/g)) {

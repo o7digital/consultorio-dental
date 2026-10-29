@@ -1,0 +1,40 @@
+---
+import type { Language } from '../data/site';
+import { teamMembers } from '../data/team';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = {
+  es: {
+    eyebrow: 'Nuestro equipo',
+    heading: 'Conoce a nuestro equipo.',
+    description: 'Atención dental, recepción y apoyo: un equipo que cuida cada detalle de tu visita al consultorio.',
+    photo: 'Espacio reservado para la fotografía de',
+    license: 'Cédula profesional',
+  },
+  en: {
+    eyebrow: 'Our team',
+    heading: 'Meet our team.',
+    description: 'Dental care, reception and support: a team looking after every detail of your visit to the practice.',
+    photo: 'Space reserved for the photograph of',
+    license: 'Professional license',
+  },
+}[lang];
+---
+<section class="team-section" id="equipo">
+  <div class="section-head"><div><p class="eyebrow"><span></span>{copy.eyebrow}</p><h2>{copy.heading}</h2></div><p>{copy.description}</p></div>
+  <div class="team-grid">
+    {teamMembers.map(member => (
+      <article class="team-card">
+        <div class="doctor-photo-placeholder" role="img" aria-label={`${copy.photo} ${member.name}`}></div>
+        <p class="team-role">{member.role[lang]}</p>
+        <h3>{member.title ? `${member.title} ${member.name}` : member.name}</h3>
+        <p>{member.qualification[lang]}</p>
+        {member.license && <p class="credential">{copy.license} {member.license}{member.university ? ` · ${member.university}` : ''}</p>}
+      </article>
+    ))}
+  </div>
+</section>

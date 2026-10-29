@@ -1,5 +1,6 @@
 ---
 import AppointmentForm from "../components/AppointmentForm.astro";
+import Team from "../components/Team.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 ---
 <SiteLayout lang="es" title={"Dentista en Ciudad Satélite | Consultorio Dental Satélite"} description={"Dentista en Ciudad Satélite, Naucalpan. Odontología integral, implantes, prótesis, estética y blanqueamiento con atención personalizada."}>
@@ -130,23 +131,14 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       <div class="about-image reveal"><img src="/assets/team.webp" srcset="/assets/team-800.webp 800w, /assets/team.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="1200" alt="Equipo profesional de Consultorio Dental Satélite dentro del consultorio" loading="lazy" decoding="async"><span>Estás en las mejores manos.</span></div>
       <div class="about-copy reveal delay">
         <p class="eyebrow light"><span></span> Nuestra esencia</p>
-        <h2>Excelencia clínica.<br><em>Cercanía humana.</em></h2>
-        <p>Conoce a nuestro equipo de profesionales de la salud. Cuidamos cada detalle para ofrecer una experiencia dental diferente, profesional y con un trato cercano.</p>
+        <h2>Atención dental.<br><em>Cercanía humana.</em></h2>
+        <p>Conoce a quienes te acompañan en el consultorio: profesionales de la atención dental, recepción y apoyo que cuidan cada detalle de tu visita con un trato cercano.</p>
         <div class="stats"><div><strong>Integral</strong><span>Distintas áreas en un mismo lugar</span></div><div><strong>Personal</strong><span>Planes hechos a tu medida</span></div></div>
         <a class="button button-light" href="#equipo">Conoce al equipo <span>→</span></a>
       </div>
     </section>
 
-    <section class="team-section" id="equipo">
-      <div class="section-head"><div><p class="eyebrow"><span></span> Nuestro equipo</p><h2>Conoce a quienes<br>cuidan tu sonrisa.</h2></div><p>Profesionales que te acompañan con atención cercana y un plan pensado para ti.</p></div>
-      <div class="team-grid">
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Espacio reservado para la fotografía del profesional"></div><p class="team-role">Responsable del consultorio</p><h3>Lourdes Carrillo Rojas</h3><p>Cirujano dentista</p><p class="credential">Cédula profesional 1624170 · UNAM</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Espacio reservado para la fotografía del profesional"></div><p class="team-role">Equipo clínico</p><h3>Karen Jiménez Marquez</h3><p>Licenciada en odontología</p><p class="credential">Cédula profesional 11940440 · UCAD</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Espacio reservado para la fotografía del profesional"></div><p class="team-role">Equipo clínico</p><h3>Xóchitl Felix Roldán</h3><p>Cirujano dentista</p><p class="credential">Cédula profesional 15202278 · UNAM</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Espacio reservado para la fotografía del profesional"></div><p class="team-role">Equipo clínico</p><h3>Juan Carlos Cervantes Riquelme</h3><p>Cirujano dentista</p><p class="credential">Cédula profesional 9822972 · UNITEC</p></article>
-<article class="team-card"><div class="doctor-photo-placeholder" role="img" aria-label="Espacio reservado para la fotografía del profesional"></div><p class="team-role">Equipo clínico</p><h3>Iván Barrera Hernández</h3><p>Cirujano dentista</p><p class="credential">Cédula profesional 5864972</p></article>
-      </div>
-    </section>
+    <Team lang="es" />
     <section class="technology" id="tecnologia">
       <div class="section-head"><div><p class="eyebrow"><span></span> Tecnología</p><h2>Herramientas para<br>una atención precisa.</h2></div><p>Recursos digitales que nos ayudan a estudiar tu caso y planificar tu tratamiento.</p></div>
       <div class="digital-grid">
